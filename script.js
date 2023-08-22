@@ -224,8 +224,9 @@ function checkpoint(e) {
 
 }
 
+/*
 document.querySelector(".blocker").addEventListener("mouseenter", blockerOver);
 
 function blockerOver(e) {
   document.querySelector(".a-canvas.a-grab-cursor").css("cursor", "defaut !important;")
-}
+}*/
