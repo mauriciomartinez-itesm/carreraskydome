@@ -1,0 +1,303 @@
+<html>
+
+<head>
+  <meta name="viewport"
+    content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui, viewport-fit=cover">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css"
+    integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+    integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="lib/fslightbox.js"></script>
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  <script src="estructura.js"></script>
+  <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+  <input type="checkbox" id="scroll-check" checked style="display:none">
+
+  <div id="logoTec" class="logoTec"><img src="assets/png/logoTec.png" width="236" height="62"></div>
+
+  <div class="search">
+    <select class="input" id="select-tools" placeholder="Buscar..."></select>
+    <button class="btn">
+      <icon>🔎</icon>
+    </button>
+  </div>
+
+
+  <div id="fade-init" class="fadeboxInit"></div>
+
+  <!--Loader-->
+  <div id="logoPEGS" class="logoPEGS"><img src="assets/png/pegs.png" width="50%" height="50%"></div>
+  <!--Loader-->
+  <div id="splash">
+    <div class="loading"></div>
+  </div>
+  <p id="inicioTxt" class="inicioTxt unselectable">Iniciando...</p>
+  <div class="btnComenzar" id="btnComenzar">
+    <div>
+      <a onclick="comenzar()" class="button2">Comenzar</a>
+    </div>
+  </div>
+  <div id="footer" class="footer">
+    <a href="https://www.facebook.com/MIRVERS" target="_blank" id="logoMirv"><img src="assets/png/logoMirv.png"
+        width="70" height="37"></a>
+    <p class="credits"><br>D.R. Instituto Tecnológico y de Estudios Superiores de Monterrey, México, 2023</p>
+  </div>
+
+  <a-scene raycaster="objects: .premio, [checkpoint], .luz, .blocker;" cursor="rayOrigin:mouse" renderer="colorManagement: true;
+                   physicallyCorrectLights: false;
+                  sortObjects: true;
+                  logarithmicDepthBuffer: false;">
+
+
+    <a-assets>
+      <a-asset-item id="fondo360" src="assets/00.glb"></a-asset-item>
+      <a-asset-item id="camp" src="assets/carreras_campanario.glb"></a-asset-item>
+      <a-asset-item id="muebles" src="assets/carreras_muebles.glb"></a-asset-item>
+      <a-asset-item id="piso" src="assets/carreras_piso.glb"></a-asset-item>
+      <a-asset-item id="arbol" src="assets/carreras_arb_plano.glb"></a-asset-item>
+      <a-asset-item id="arbusto" src="assets/carreras_arbusto.glb"></a-asset-item>
+      <a-asset-item id="arbusto" src="assets/carreras_arbusto.glb"></a-asset-item>
+
+
+      <img id="pasto" src="assets/pasto.png" />
+      <img id="rome" src="assets/romero_camp.png" />
+      <img id="arbol1" src="assets/agr00.png" />
+      <img id="arbol2" src="assets/agr01.png" />
+      <img id="luz" src="assets/elemento.png" />
+      <img id="prem" src="assets/premio.png">
+      <img id="titu" src="assets/texto.png">
+      <img id="grar01" src="assets/arb_grupo.png" />
+      <img id="ar00" src="assets/arbol00.png" />
+      <img id="ar01" src="assets/arbol01.png" />
+      <img id="ar02" src="assets/arbol02.png" />
+      <img id="ar03" src="assets/arbol03.png" />
+
+      <img id="agr00" src="assets/agr00.png" />
+      <img id="agr01" src="assets/agr01.png" />
+      <img id="agr02" src="assets/agr02.png" />
+      <img id="agr03" src="assets/agr03.png" />
+      <img id="abgr00" src="assets/abgr00.png" />
+      <img id="abgr01" src="assets/abgr01.png" />
+      <img id="abgr02" src="assets/abgr02.png" />
+      <img id="abgr03" src="assets/abgr03.png" />
+
+      <img id="pin" src="assets/pin.png" />
+
+    </a-assets>
+
+    <a-entity id="rig" position="0.707 0 4.5">
+      <a-entity id="camara" camera="fov:77" zoom-controls="min:40;max:120;" position="0 1.5 0" look-controls></a-entity>
+      <a-entity id="leftHand" laser-controls raycaster="objects: .premio, [checkpoint], .luz, .blocker; far: 10"
+        hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"></a-entity>
+      <a-entity id="rightHand" laser-controls raycaster="objects: .premio, [checkpoint], .luz, .blocker; far: 10"
+        hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"></a-entity>
+    </a-entity>
+
+
+    <a-entity id="mural" position="0.579 1.811 3.219"></a-entity>
+
+    <a-entity class="luz" geometry="primitive:box;" material="color: red; opacity:0;" onclick="luzClick()"
+      scale="0.01 0.32 0.51" position="2.976 1.205 1.396"></a-entity>
+
+    <a-entity class="luz" geometry="primitive:box;" material="color: red; opacity:0;" onclick="explClick()"
+      scale="1.45 0.76 0.01" position="1.82 1.378 3"></a-entity>
+
+
+    <a-entity class="blocker" geometry="primitive:box;" material="color: red; opacity:0;" scale="3.15 1.77 0.01"
+      position="1.541 1.106 3.115"></a-entity>
+
+    <a-entity class="blocker" geometry="primitive:box;" material="color: red; opacity:0;" scale="0.05 1.77 2.51"
+      position="3.095 1.106 1.59"></a-entity>
+
+
+    <!-- Checkpoints -->
+    <a-entity position="0 0 0">
+      <a-plane id="initialCheckpoint" width=".4" height=".4" material="shader: flat; transparent: true; src:#pin"
+        checkpoint="" onclick="checkpoint(this)" look-at="[camera]" position="0.707 1.4 4.5" scale="0 0 0"></a-plane>
+      <a-plane id="ch2" width=".4" height=".4" material="shader: flat; transparent: true; src:#pin" checkpoint=""
+        onclick="checkpoint(this)" look-at="[camera]" position="1.968 1.4 4.5"></a-plane>
+      <a-plane id="ch3" width=".4" height=".4" material="shader: flat; transparent: true; src:#pin" checkpoint=""
+        onclick="checkpoint(this)" look-at="[camera]" position="3.920 1.4 3.889"></a-plane>
+      <a-plane id="ch4" width=".4" height=".4" material="shader: flat; transparent: true; src:#pin" checkpoint=""
+        onclick="checkpoint(this)" look-at="[camera]" position="4.287 1.4 2.711"></a-plane>
+      <a-plane id="ch5" width=".4" height=".4" material="shader: flat; transparent: true; src:#pin" checkpoint=""
+        onclick="checkpoint(this)" look-at="[camera]" position="4.287 1.4 1.285"></a-plane>
+      <a-plane id="ch6" width=".4" height=".4" material="shader: flat; transparent: true; src:#pin" checkpoint=""
+        onclick="checkpoint(this)" look-at="[camera]" position="2.524 1.4 -1.213"></a-plane>
+      <a-plane id="ch7" width=".4" height=".4" material="shader: flat; transparent: true; src:#pin" checkpoint=""
+        onclick="checkpoint(this)" look-at="[camera]" position="1.743 1.4 1.796"></a-plane>
+      <a-plane id="ch8" width=".4" height=".4" material="shader: flat; transparent: true; src:#pin" checkpoint=""
+        onclick="checkpoint(this)" look-at="[camera]" position="-1.226 1.4 2.453"></a-plane>
+    </a-entity>
+
+    <a-entity id="escenario">
+      <!-- modelos -->
+      <a-entity gltf-model="#camp" position="0 0 0" material="transparent:false;"> </a-entity>
+      <a-entity gltf-model="#piso" position="0 0 0"></a-entity>
+      <a-entity gltf-model="#muebles" position="0 0 0"></a-entity>
+      <a-entity gltf-model="#arbusto" position="0 0 0"></a-entity>
+
+      <a-image material="alphaTest: 0.5" src="#luz" scale="1.75 1.75 1.75" position="2.965 1.166 1.78"
+        rotation="0 -90 0">
+      </a-image>
+      <a-image material="alphaTest: 0.5" src="#prem" scale="1.40222 1.40222 1.40222" position="1.83021 1.37666 2.99018"
+        rotation="0 180 0" geometry=""></a-image>
+      <a-image material="alphaTest: 0.5" src="#titu" scale="2.61 2.61 2.61" position="3.18257 1.87668 1.65819"
+        rotation="0 90 0" geometry=""></a-image>
+      <a-image material="alphaTest: 0.5" src="#titu" scale="2.61 2.61 2.61" position="1.53307 1.87668 3.2079"
+        rotation="" geometry=""></a-image>
+
+      <!-- romeritos del campanario -->
+      <a-image material="alphaTest: 0.1" src="#rome" scale="0.48224 0.48224 0.48224" position="1.43755 0.1922 -1.08278"
+        rotation="6.853721145354908 -89.11269883449206 0.0492743703812508" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#rome" scale="0.43641 0.43641 0.43641" position="1.43236 0.16132 -0.67427"
+        rotation="9.720228994394416 -94.61080183656745 -4.968117041579368" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#rome" scale="0.53333 0.53333 0.53333" position="1.44401 0.20854 -0.07016"
+        rotation="9.331763609295717 -89.11670953905798 0" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#rome" scale="0.60587 0.60587 0.60587" position="1.43931 0.2292 0.30088"
+        rotation="-9.090548377545641 87.66426152840134 -5.6591041425071404" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#rome" scale="0.45133 0.45133 0.45133" position="1.44839 0.17519 0.86754"
+        rotation="7.7143037536414045 -89.11670953905798 0" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#rome" scale="0.60587 0.60587 0.60587" position="1.43221 0.23611 1.08462"
+        rotation="-9.090548377545641 87.66426152840134 -5.6591041425071404" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#rome" scale="0.48224 0.48224 0.48224" position="0.92995 0.19369 1.54888"
+        rotation="-9.853728160659898 -3.4079529654381364 4.357916989765042" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#rome" scale="0.48224 0.48224 0.48224" position="0.92995 0.19369 1.54888"
+        rotation="-9.853728160659898 -3.4079529654381364 4.357916989765042" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#rome" scale="0.53333 0.53333 0.53333" position="-0.16754 0.21454 1.55453"
+        rotation="10.116715788624946 175.29758333586562 -9.45896023981476" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#rome" scale="0.5937 0.5937 0.5937" position="-0.8644 0.22917 1.57006"
+        rotation="3.6709405934031847 -178.94159491289767 -7.911401235166408" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#rome" scale="0.60587 0.60587 0.60587" position="-1.14679 0.23011 1.6121"
+        rotation="-8.742762995901233 20.078732972564566 6.185652356232367" geometry=""></a-image>
+
+
+
+      <!-- meti arbolillos en grupo -->
+      <a-image material="alphaTest: 0.1" src="#grar01" scale="20 20 20" position="16.2 4 13.75" rotation="0 40 0">
+      </a-image>
+      <a-image material="alphaTest: 0.1" src="#ar00" scale="10 10 10" position="2.86 4.1 16" rotation="0 15 0">
+      </a-image>
+      <a-image material="alphaTest: 0.1" src="#ar01" scale="12 12 12" position="10.25 4 14.5" rotation="0 15 0">
+      </a-image>
+      <a-image material="alphaTest: 0.1" src="#ar02" scale="11 11 11" position="21.4 5 .8" rotation="0 -113 0">
+      </a-image>
+      <a-image material="alphaTest: 0.1" src="#ar00" scale="10 10 10" position="17.5 4 6" rotation="0 60 0"></a-image>
+      <a-image material="alphaTest: 0.1" src="#ar01" scale="10 10 10" position="20 4 -16" rotation="0 85 0"></a-image>
+      <a-image material="alphaTest: 0.1" src="#ar02" scale="11 11 11" position="16.73174 5 -9.12801"
+        rotation="0 -73.5992935735299 0" geometry=""></a-image>
+
+      <!-- arbolillos del fondo />-->
+      <a-image material="alphaTest: 0.1" src="#ar01" scale="10 10 10" position="21.25722 4 -12.54085"
+        rotation="0 124.48997789484474 0" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#agr00" scale="14.28592 14.28592 14.28592"
+        position="-12.91962 2.20637 14.32697" rotation="0 116.26975240810283 0" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#agr01" scale="14.28592 14.28592 14.28592"
+        position="-15.26145 2.44208 -4.66555" rotation="0 74.19516968046595 0" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#agr02" scale="14.286 14.286 14.286" position="-4.45962 4.355 -14.60387"
+        rotation="0 22.5367219136758 0" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#agr03" scale="14.286 14.286 14.286" position="7.58363 5.36708 -21.44495"
+        rotation="0 -12.489906976056815 0" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#abgr00" scale="11.94089 11.94089 11.94089"
+        position="-22.09488 4.57444 5.60774" rotation="0 87.864223798902 0" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#abgr01" scale="11.03005 11.03005 15.77157"
+        position="-19.24248 2.86106 -13.36145" rotation="0 63.131354656489755 0" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#abgr02" scale="14.286 14.286 14.286"
+        position="-9.52495 4.11325 -19.63793" rotation="0 31.814999999999998 0" geometry=""></a-image>
+      <a-image material="alphaTest: 0.1" src="#abgr03" scale="14.286 14.286 14.286" position="2.72994 4.61266 -29.87536"
+        rotation="0 13.430130717866497 0" geometry=""></a-image>
+
+      <!-- pastos felices -->
+
+      <a-entity class="pastos">
+        <a-entity class="pasto" position="4.258 0.8 -1.921">
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" geometry=""></a-image>
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" rotation="0 90 0" geometry=""></a-image>
+        </a-entity>
+        <a-entity class="pasto" position="-2.879 0.8 5.185">
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" geometry=""></a-image>
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" rotation="0 90 0" geometry=""></a-image>
+        </a-entity>
+        <a-entity class="pasto" position="-3.13 0.8 5.683" rotation="0 40 0">
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" geometry=""></a-image>
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" rotation="0 90 0" geometry=""></a-image>
+        </a-entity>
+        <a-entity class="pasto" position="-2.269 0.8 5.647" rotation="0 25 0">
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" geometry=""></a-image>
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" rotation="0 90 0" geometry=""></a-image>
+        </a-entity>
+        <a-entity class="pasto" position="-1.614 0.541 5.509" rotation="0 56 0">
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" geometry="" scale="1 0.7 1"></a-image>
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" rotation="0 90 0" geometry="" scale="1 0.7 1">
+          </a-image>
+        </a-entity>
+        <a-entity class="pasto" position="4.67879 0.54 -1.73659" scale="1 0.68 1" rotation="0 23.13 0">
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" geometry="" position=""></a-image>
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" rotation="0 90 0" geometry=""></a-image>
+        </a-entity>
+        <a-entity class="pasto" position="3.154 0.54 -0.168" scale="1 0.68 1" rotation="0 58.02300000000001 0">
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" geometry="" position=""></a-image>
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" rotation="0 90 0" geometry=""></a-image>
+        </a-entity>
+        <a-entity class="pasto" position="-0.268 0.54 3.344" scale="1 0.68 1" rotation="0 58.02300000000001 0">
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" geometry="" position=""></a-image>
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" rotation="0 90 0" geometry=""></a-image>
+        </a-entity>
+        <a-entity class="pasto" position="3.107 0.54 -1.01" scale="0.5 0.68 0.5" rotation="0 58.02300000000001 0">
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" geometry="" position=""></a-image>
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" rotation="0 90 0" geometry="" position="">
+          </a-image>
+        </a-entity>
+        <a-entity class="pasto" position="3.107 0.54 -0.672" scale="0.5 0.68 0.5" rotation="0 28.992000000000004 0">
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" geometry="" position=""></a-image>
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" rotation="0 90 0" geometry="" position="">
+          </a-image>
+        </a-entity>
+        <a-entity class="pasto" position="-1.662 0.54 3.329" scale="0.5 0.68 0.5" rotation="0 28.992000000000004 0">
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" geometry="" position=""></a-image>
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" rotation="0 90 0" geometry="" position="">
+          </a-image>
+        </a-entity>
+        <a-entity class="pasto" position="-1.053 0.54 3.329" scale="0.5 0.68 0.5" rotation="0 45 0">
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" geometry="" position=""></a-image>
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" rotation="0 45 0" geometry="" position="">
+          </a-image>
+        </a-entity>
+        <a-entity class="pasto" position="4.388 0.8 -2.593">
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" geometry=""></a-image>
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" rotation="0 90 0" geometry=""></a-image>
+        </a-entity>
+        <a-entity class="pasto" position="4.83532 0.8 -2.23477" rotation="0 45 0" visible="">
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" geometry=""></a-image>
+          <a-image height="2" material="alphaTest: 0.5" src="#pasto" rotation="0 90 0" geometry=""></a-image>
+        </a-entity>
+      </a-entity>
+
+
+
+      <a-entity gltf-model="#fondo360" scale="30 30 30" position="0 1.5 -5"
+        cube-env-map="path: envlab/;extension: png;">
+      </a-entity>
+      <a-light type="ambient" color="#FFF" intensity="1"></a-light>
+      <a-entity light="intensity: 0.6;" position="-0.5 1 1"></a-entity>
+      <a-sky color="#FFF"></a-sky>
+
+    </a-entity>
+  </a-scene>
+</body>
+<script src="script.js"></script>
+<script src="searchbar.js"></script>
+<script src="zoom-controls.js"></script>
+
+</html>
